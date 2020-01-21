@@ -3,7 +3,7 @@ FBox Lfloor, Rfloor, Net, Lwall, Rwall,Roof;
 FCircle player1, player2,ball;
 FWorld world;
 boolean wkey, akey, skey, dkey,qkey,ekey;
-boolean ukey,rkey,lkey,dnkey;
+boolean ukey,rkey,lkey,dnkey,uukey,okey;
 boolean ljump,rjump;
 void setup() {   
   fullScreen(FX2D);  
@@ -39,6 +39,7 @@ Roof.setPosition(width/2, -50);
   
   player2=new FCircle(75);
   player2.setPosition(1000, 700);
+    player2.setDensity(2);
   world.add(player2);
   
   ball=new FCircle(50);
@@ -84,7 +85,7 @@ for(FContact c : contactsB ){
  for(FContact c : contacts){
    if(c.contains(Lfloor)) ljump=true;
    if(c.contains(Rfloor)) ljump=true;
-    if(c.contains(player2)) ljump=true;
+   
     
      
  }
@@ -94,16 +95,16 @@ for(FContact c : contactsB ){
     if (skey) player1.addImpulse(0, 500);
     
     
-      rjump=false;
+     
   ArrayList<FContact> contactss=player2.getContacts();
  for(FContact c : contactss){
    if(c.contains(Rfloor)) rjump=true;
     if(c.contains(Lfloor)) rjump=true;
-    if(c.contains(player1)) rjump=true;
+
  }
     
     
-      if (ukey && ljump) player2.addImpulse(0, -1500);
+      if (ukey && rjump) player2.addImpulse(0, -10000);
   if (lkey) player2.addImpulse(-350, 0); 
   if (rkey) player2.addImpulse(350, 0);
     if (dnkey) player2.addImpulse(0, 500);
@@ -124,11 +125,13 @@ public void keyPressed() {
   if (key=='w'|| key=='W') wkey = true;
     if (key=='q'|| key=='Q') qkey = true;
     if (key=='e'|| key=='E') ekey = true;
-  
-    if (key==(LEFT)) lkey = true;
-  if (key==(RIGHT)) rkey = true;
-  if (key==(DOWN)) dnkey = true;
-  if (key==(UP)) ukey = true;
+ 
+     if (key=='j'|| key=='J') lkey = true;
+   if (key=='l'|| key=='L') rkey =true;
+  if (key=='k'|| key=='K')  dnkey = true;
+    if (key=='i'|| key=='I') ukey = true;
+     if (key=='u'|| key=='U') uukey = true;
+      if (key=='o'|| key=='O') okey = true;
 }
 
 
@@ -140,8 +143,10 @@ public void keyReleased() {
   if (key=='q'|| key=='Q') qkey = false;
   if (key=='e'|| key=='E') ekey = false;
   
-    if (key==(LEFT)) lkey = false;
-  if (key==(RIGHT)) rkey = false;
-  if (key==(DOWN)) dnkey = false;
-  if (key== (UP)) ukey = false;
+     if (key=='j'|| key=='J') lkey = false;
+   if (key=='l'|| key=='L') rkey = false;
+  if (key=='k'|| key=='K')  dnkey = false;
+    if (key=='i'|| key=='I') ukey = false;
+     if (key=='u'|| key=='U') uukey = false;
+      if (key=='o'|| key=='O') okey = false;
 }
